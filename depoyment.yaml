@@ -37,7 +37,6 @@ metadata:
   name: {{.Values.name}}
 spec:
   replicas: {{int .Values.replicas}}
-  progressDeadlineSeconds: 600
   selector:
     matchLabels:
       app: {{.Values.name}}
@@ -46,7 +45,6 @@ spec:
       labels:
         app: {{.Values.name}}
     spec:
-        
       {{- if .Values.dockercfg}}
       imagePullSecrets:
       - name: {{.Values.name}}-dockercfg
@@ -64,12 +62,4 @@ spec:
         - secretRef:
             name: {{.Values.name}}
         {{- end}}
-        # livenessProbe:
-        #     httpGet:
-        #         path: /live
-        #         port: 3000
-        # readinessProbe:
-        #     httpGet:
-        #         path: /ready
-        #         port: 3000
         {{- end}}
